@@ -15,3 +15,7 @@ func Saudacao(c *gin.Context) {
 		"API diz": "E ai " + nome + ", tudo beleza?",
 	})
 }
+
+func CriarAlunos(c *gin.Context) {
+
+}
