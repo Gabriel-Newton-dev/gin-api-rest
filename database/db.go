@@ -1,25 +1,21 @@
 package database
 
 import (
+	"fmt"
 	"log"
 
-	"github.com/Gabriel-Newton-dev/gin-api-rest/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	_ "github.com/lib/pq"
 )
 
-var (
-	DB  *gorm.DB
-	err error
-)
-
-func ConectaComBancoDeDados() {
-	StringDeConexao := "host=localhost user=root password=root dbname=root port=5431 sslmode=disable"
-	DB, err := gorm.Open(postgres.Open(StringDeConexao)) //&gorm.Config{}
+func ConectaComBancoDeDados() *gorm.DB {
+	conexao := "host=localhost user=root password=root dbname=root port=5452 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(conexao), &gorm.Config{})
 	if err != nil {
-		log.Println("Não foi possível conectar com banco de dados", err)
+		log.Fatal(err)
 	}
-
-	DB.AutoMigrate(&models.Aluno{})
-
+	fmt.Println("Comunição OK com Banco de Dados.")
+	return db
 }

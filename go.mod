@@ -3,6 +3,11 @@ module github.com/Gabriel-Newton-dev/gin-api-rest
 go 1.18
 
 require (
+	github.com/lib/pq v1.10.2
+	gorm.io/gorm v1.24.2
+)
+
+require (
 	github.com/Gabriel-Newton-dev/API_Rest_Golang v0.0.0-20221227002035-5d04d74bdb3a // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/gin v1.8.2 // indirect
@@ -35,5 +40,4 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/postgres v1.4.5 // indirect
-	gorm.io/gorm v1.24.2 // indirect
 )
