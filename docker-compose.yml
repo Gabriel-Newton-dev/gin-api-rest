@@ -1,16 +1,16 @@
-version: '20'
+version: '3'
 services:
   postgres:
     image: "postgres"
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root  
+      - POSTGRES_DB=root
     ports:
       - "5431:5431"
     volumes:
-      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql   
-
+      - ./postgres-data:/var/lib/postgresql/data  
+    
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:

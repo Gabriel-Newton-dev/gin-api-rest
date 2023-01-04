@@ -16,6 +16,6 @@ func Saudacao(c *gin.Context) {
 	})
 }
 
-func CriarAlunos(c *gin.Context) {
+// func CriarAlunos(c *gin.Context) {
 
-}
+// }
