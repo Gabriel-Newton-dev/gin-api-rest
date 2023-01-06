@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=root
     ports:
-      - "5431:5431"
+      - "5410:5410"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data  
     
