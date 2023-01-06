@@ -27,5 +27,5 @@ func CriaNovoAluno(c *gin.Context) {
 		return
 	}
 	database.DB.Create(&aluno)
-	c.JSON(http.StatusOK, aluno)
+	c.JSON(http.StatusCreated, aluno)
 }
