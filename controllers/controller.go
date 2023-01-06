@@ -15,7 +15,7 @@ func ExibeTodosAlunos(c *gin.Context) {
 func Saudacao(c *gin.Context) {
 	nome := c.Params.ByName("nome")
 	c.JSON(200, gin.H{
-		"API diz": "E ai " + nome + ", tudo beleza?",
+		"API diz": "Seja bem-vindo" + nome + ", a nossa API que se comunica com banco de dados postgres?",
 	})
 }
 
@@ -27,5 +27,5 @@ func CriaNovoAluno(c *gin.Context) {
 		return
 	}
 	database.DB.Create(&aluno)
-	c.JSON(http.StatusOK, aluno)
+	c.JSON(http.StatusCreated, aluno)
 }
