@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"net/http"
+
+	"github.com/Gabriel-Newton-dev/gin-api-rest/database"
 	"github.com/Gabriel-Newton-dev/gin-api-rest/models"
 	"github.com/gin-gonic/gin"
 )
@@ -16,6 +19,13 @@ func Saudacao(c *gin.Context) {
 	})
 }
 
-// func CriarAlunos(c *gin.Context) {
-
-// }
+func CriaNovoAluno(c *gin.Context) {
+	var aluno models.Aluno
+	if err := c.ShouldBindJSON(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+	database.DB.Create(&aluno)
+	c.JSON(http.StatusOK, aluno)
+}
