@@ -5,10 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func HandleRequest() {
+func HandleRequests() {
 	r := gin.Default()
 	r.GET("/alunos", controllers.ExibeTodosAlunos)
 	r.GET("/:nome", controllers.Saudacao)
 	r.POST("/alunos", controllers.CriaNovoAluno)
+	r.GET("/alunos/:id", controllers.BuscaAlunoPorID)
 	r.Run()
 }
+
+// Na nossa rota r.GET("/alunos/:id", mais nome da funcao)
+// colocamos ' : ' pq é a informacao que vai variar, assim como a funcao SAudacao acima

@@ -9,7 +9,11 @@ import (
 )
 
 func ExibeTodosAlunos(c *gin.Context) {
-	c.JSON(200, models.Alunos)
+	var alunos []models.Aluno
+	database.DB.Find(&alunos)
+	// database.DB.Find(mais endereco de memoria), por se tratar de um slice com várias informacoes
+	//temos que criar uma variável var alunos que recebe um slice da struct []models.Aluno
+	c.JSON(200, alunos)
 }
 
 func Saudacao(c *gin.Context) {
@@ -28,4 +32,11 @@ func CriaNovoAluno(c *gin.Context) {
 	}
 	database.DB.Create(&aluno)
 	c.JSON(http.StatusCreated, aluno)
+}
+
+func BuscaAlunoPorID(c *gin.Context) {
+	var aluno models.Aluno
+	id := c.Params.ByName("id")
+	database.DB.First(&aluno, id)
+	c.JSON(http.StatusOK, aluno)
 }
