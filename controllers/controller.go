@@ -64,6 +64,8 @@ func EditaAluno(c *gin.Context) {
 		return // caso tenha um erro ele irá sair da função.
 	}
 	database.DB.Model(&aluno).UpdateColumns(aluno)
+	c.JSON(http.StatusOK, gin.H{
+		"Edição": "Aluno Editado com Sucesso no banco de dados."})
 
 }
 
