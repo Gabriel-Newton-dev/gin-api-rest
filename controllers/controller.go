@@ -73,3 +73,15 @@ func EditaAluno(c *gin.Context) {
 // Se tem o corpo a forma que usamos é o shouldBindJson para empacotar todo corpo da
 //requisicao com base na nossa struct, com base no nosso endereco de memória da var aluno que criamos
 // if err := .ShouldBindJSON()
+
+func BuscaAlunoPorCpf(c *gin.Context) {
+	var aluno models.Aluno
+	cpf := c.Param("cpf")
+	database.DB.Where(&models.Aluno{CPF: cpf}).First(&aluno)
+	if aluno.ID == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"Not Found": "CPF não localizado"})
+		return
+	}
+	c.JSON(http.StatusOK, aluno)
+}
