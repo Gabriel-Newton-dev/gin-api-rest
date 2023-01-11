@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	viper.SetConfigFile(".envn")
+	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	database.ConectaComBancoDeDados()
 	routes.HandleRequests()
