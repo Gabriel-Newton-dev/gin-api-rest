@@ -1,6 +1,9 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gopkg.in/validator.v2"
+	"gorm.io/gorm"
+)
 
 type Aluno struct {
 	gorm.Model
@@ -11,3 +14,10 @@ type Aluno struct {
 
 // criei um slice de Aluno(como se fosse uma lista, pq terá vários)
 var Alunos []Aluno
+
+func ValidaDadosDeAluno(aluno *Aluno) error {
+	if err := validator.Validate(aluno); err != nil {
+		return err
+	}
+	return nil
+}
