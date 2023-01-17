@@ -30,6 +30,10 @@ func CriaNovoAluno(c *gin.Context) {
 			"error": err.Error()})
 		return
 	}
+	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+	}
 	database.DB.Create(&aluno)
 	c.JSON(http.StatusCreated, aluno)
 }
@@ -62,6 +66,10 @@ func EditaAluno(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Erro na função Edita Aluno"})
 		return // caso tenha um erro ele irá sair da função.
+	}
+	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
 	}
 	database.DB.Model(&aluno).UpdateColumns(aluno)
 	c.JSON(http.StatusOK, gin.H{
