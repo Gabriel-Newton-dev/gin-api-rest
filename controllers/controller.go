@@ -33,6 +33,7 @@ func CriaNovoAluno(c *gin.Context) {
 	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
+		return
 	}
 	database.DB.Create(&aluno)
 	c.JSON(http.StatusCreated, aluno)
@@ -69,12 +70,12 @@ func EditaAluno(c *gin.Context) {
 	}
 	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error()})
+			"erro": err.Error()})
+		return
 	}
-	database.DB.Model(&aluno).UpdateColumns(aluno)
-	c.JSON(http.StatusOK, gin.H{
-		"Edição": "Aluno Editado com Sucesso no banco de dados."})
-
+	// database.DB.Model(&aluno).UpdateColumns(aluno)
+	database.DB.Save(&aluno)
+	c.JSON(http.StatusOK, aluno)
 }
 
 // a funcao edita alunos ela irá pegar o copor da nossa requisicao e mudar no BD
