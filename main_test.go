@@ -1,12 +1,14 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/Gabriel-Newton-dev/gin-api-rest/controllers"
 	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 )
 
 func SetupDasRotasDeTeste() *gin.Engine {
@@ -20,7 +22,9 @@ func TestVerificaEndpointSaudacao(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/gabriel", nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
-	if response.Code != http.StatusOK {
-		t.Fatalf("Status Error: valor recebido foi %d e o esperado era %d", response.Code, http.StatusOK)
-	}
+	assert.Equal(t, http.StatusOK, response.Code, "Deveriam ser iguais")
+	mockDaResposta := `{"API diz":"Seja bem-vindo gabriel a nossa API"}`
+	responseBody, _ := ioutil.ReadAll(response.Body)
+	assert.Equal(t, mockDaResposta, string(responseBody))
+
 }
