@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -18,6 +17,7 @@ import (
 var ID int
 
 func SetupDasRotasDeTeste() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	rotas := gin.Default()
 	return rotas
 }
@@ -60,6 +60,20 @@ func TestListandoTodosAlunosHandler(t *testing.T) {
 	response := httptest.NewRecorder() // para armanezar todas as informacoes do corpo da nossa resposta
 	r.ServeHTTP(response, req)
 	assert.Equal(t, http.StatusOK, response.Code) // assertação para verificar se de fato estamos recebendo o status code que a gente espera.
-	fmt.Println(response.Body)
+	// fmt.Println(response.Body)
 	// t- teste, depois valor esperado - http.StatusOK, e o que vou receber é o status code da resposta
+}
+
+func TestBuscarPorCPF(t *testing.T) {
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
+	database.ConectaComBancoDeDados()
+	CriarAlunoMock()
+	defer DeletarAlunoMock()
+	r := SetupDasRotasDeTeste()
+	r.GET("/alunos/cpf/:cpf", controllers.BuscaAlunoPorCpf)
+	req, _ := http.NewRequest("GET", "/alunos/cpf/12345678910", nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+	assert.Equal(t, http.StatusOK, response.Code)
 }
