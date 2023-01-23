@@ -25,7 +25,7 @@ func ConectaComBancoDeDados() {
 		log.Panic("Erro ao conectar com banco de dados")
 	}
 
-	DB.AutoMigrate(&models.Aluno{})
+	DB.AutoMigrate(&models.Student{})
 }
 
 // para eu criar uma tabela no banco de dados usando o GORM, eu utilizo o DB.AutoMigrate
