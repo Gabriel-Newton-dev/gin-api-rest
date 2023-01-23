@@ -3,9 +3,9 @@ services:
   postgres:
     image: "postgres"
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root
+      - POSTGRES_USER= DbUser
+      - POSTGRES_PASSWORD= DbPassword
+      - POSTGRES_DB= dbName
     ports:
       - "5410:5410"
     volumes:
@@ -14,8 +14,8 @@ services:
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "gabriel@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "gabriel@123"
+      PGADMIN_DEFAULT_EMAIL: PGADMIN_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: PGADMIN_PASSWORD
     ports:
       - "54321:80"
     depends_on:
