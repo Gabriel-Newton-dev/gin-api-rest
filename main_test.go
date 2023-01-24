@@ -48,7 +48,7 @@ func TestVerificaEndpointSaudacao(t *testing.T) {
 
 }
 
-func TestListandoTodosAlunosHandler(t *testing.T) {
+func TestListingAllStudentHandler(t *testing.T) {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	database.ConectaComBancoDeDados()
@@ -64,9 +64,8 @@ func TestListandoTodosAlunosHandler(t *testing.T) {
 	// t- teste, depois valor esperado - http.StatusOK, e o que vou receber é o status code da resposta
 }
 
-func TestBuscarPorCPF(t *testing.T) {
-	viper.SetConfigFile(".env")
-	viper.ReadInConfig()
+func TestSearchByCPF(t *testing.T) {
+	controllers.CallViper()
 	database.ConectaComBancoDeDados()
 	CriarAlunoMock()
 	defer DeletarAlunoMock()
@@ -76,4 +75,10 @@ func TestBuscarPorCPF(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 	assert.Equal(t, http.StatusOK, response.Code)
+}
+
+// r.GET("/alunos/:id", controllers.BuscaAlunoPorID)
+
+func TestSearchStudentByID(t *testing.T) {
+
 }

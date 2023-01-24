@@ -6,6 +6,7 @@ import (
 	"github.com/Gabriel-Newton-dev/gin-api-rest/database"
 	"github.com/Gabriel-Newton-dev/gin-api-rest/models"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 func ExibeTodosAlunos(c *gin.Context) {
@@ -104,4 +105,9 @@ func BuscaPorRg(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, aluno)
+}
+
+func CallViper() {
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
 }
