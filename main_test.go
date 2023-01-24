@@ -1,9 +1,12 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 
 	"github.com/Gabriel-Newton-dev/gin-api-rest/controllers"
@@ -16,28 +19,28 @@ import (
 
 var ID int
 
-func SetupDasRotasDeTeste() *gin.Engine {
+func RouterSetup() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
-	rotas := gin.Default()
-	return rotas
+	routes := gin.Default()
+	return routes
 }
 
-func CriarAlunoMock() {
-	aluno := models.Aluno{Nome: "Aluno Teste", CPF: "12345678910", RG: "123456789"}
+func CreateStudentMock() {
+	aluno := models.Student{Nome: "Aluno Teste", CPF: "12345678910", RG: "123456789"}
 	database.DB.Create(&aluno)
 	ID = int(aluno.ID)
 
 }
 
-func DeletarAlunoMock() {
-	var aluno models.Aluno
+func DeleteStudentMock() {
+	var aluno models.Student
 	database.DB.Delete(&aluno, ID)
 
 }
 
-func TestVerificaEndpointSaudacao(t *testing.T) {
-	r := SetupDasRotasDeTeste()
-	r.GET("/:nome", controllers.Saudacao)
+func TestCheckEndpointSalutation(t *testing.T) {
+	r := RouterSetup()
+	r.GET("/:nome", controllers.Salutation)
 	req, _ := http.NewRequest("GET", "/gabriel", nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
@@ -52,10 +55,8 @@ func TestListingAllStudentHandler(t *testing.T) {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 	database.ConectaComBancoDeDados()
-	CriarAlunoMock()
-	defer DeletarAlunoMock()
-	r := SetupDasRotasDeTeste()
-	r.GET("/alunos", controllers.ExibeTodosAlunos)
+	r := RouterSetup()
+	r.GET("/alunos", controllers.DisplayAllStudent)
 	req, _ := http.NewRequest("GET", "/alunos", nil)
 	response := httptest.NewRecorder() // para armanezar todas as informacoes do corpo da nossa resposta
 	r.ServeHTTP(response, req)
@@ -67,18 +68,26 @@ func TestListingAllStudentHandler(t *testing.T) {
 func TestSearchByCPF(t *testing.T) {
 	controllers.CallViper()
 	database.ConectaComBancoDeDados()
-	CriarAlunoMock()
-	defer DeletarAlunoMock()
-	r := SetupDasRotasDeTeste()
-	r.GET("/alunos/cpf/:cpf", controllers.BuscaAlunoPorCpf)
-	req, _ := http.NewRequest("GET", "/alunos/cpf/12345678910", nil)
+	r := RouterSetup()
+	r.GET("/alunos/cpf/:cpf", controllers.SearchByCpf)
+	req, _ := http.NewRequest("GET", "/alunos/cpf/20092060720", nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 	assert.Equal(t, http.StatusOK, response.Code)
 }
 
-// r.GET("/alunos/:id", controllers.BuscaAlunoPorID)
-
 func TestSearchStudentByID(t *testing.T) {
+	controllers.CallViper()
+	database.ConectaComBancoDeDados()
+	r := RouterSetup()
+	r.GET("/alunos/:id", controllers.SearchStudentbyID)
+	SearchPath := "/alunos/" + strconv.Itoa(ID)
+	req, _ := http.NewRequest("GET", SearchPath, nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+	var Student models.Student
+	json.Unmarshal(response.Body.Bytes(), &Student)
+	fmt.Println(Student.Nome)
+	//assert.Equal(t, ) // Firts test t,
 
 }
