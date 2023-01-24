@@ -18,9 +18,9 @@ func DisplayAllStudent(c *gin.Context) {
 }
 
 func Salutation(c *gin.Context) {
-	nome := c.Params.ByName("nome")
+	name := c.Params.ByName("nome")
 	c.JSON(200, gin.H{
-		"API diz": "Seja bem-vindo " + nome + " a nossa API"})
+		"API says": "Welcome " + name + " to our API."})
 }
 
 func CreateNewStudent(c *gin.Context) {
@@ -30,7 +30,7 @@ func CreateNewStudent(c *gin.Context) {
 			"error": err.Error()})
 		return
 	}
-	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
+	if err := models.ValidateStudentData(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
 		return
@@ -45,7 +45,7 @@ func SearchStudentbyID(c *gin.Context) {
 	database.DB.First(&aluno, id)
 	if aluno.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
-			"Not Found": "Aluno não encontrado."})
+			"Not Found": "Student Not Found"})
 		return
 	}
 	c.JSON(http.StatusOK, aluno)
@@ -56,7 +56,7 @@ func DeleteStudent(c *gin.Context) {
 	id := c.Params.ByName("id")
 	database.DB.Delete(&aluno, id)
 	c.JSON(http.StatusOK, gin.H{
-		"Deletado": "Usuário deletado do banco de dados com sucesso."})
+		"Deleted": "User successfully deleted from data base"})
 }
 
 func EditStudent(c *gin.Context) {
@@ -65,10 +65,10 @@ func EditStudent(c *gin.Context) {
 	database.DB.First(&aluno, id)
 	if err := c.ShouldBindJSON(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Erro na função Edita Aluno"})
+			"error": "Error in function Edit Student"})
 		return // caso tenha um erro ele irá sair da função.
 	}
-	if err := models.ValidaDadosDeAluno(&aluno); err != nil {
+	if err := models.ValidateStudentData(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"erro": err.Error()})
 		return
@@ -89,7 +89,7 @@ func SearchByCpf(c *gin.Context) {
 	database.DB.Where(&models.Student{CPF: cpf}).First(&aluno)
 	if aluno.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"Not Found": "CPF não localizado"})
+			"Not Found": "Not Found CPF"})
 		return
 	}
 	c.JSON(http.StatusOK, aluno)
@@ -101,7 +101,7 @@ func SearchByRg(c *gin.Context) {
 	database.DB.Where(&models.Student{RG: rg}).First(&aluno)
 	if aluno.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"Not Found": "RG não localizado"})
+			"Not Found": "Not Found RG"})
 		return
 	}
 	c.JSON(http.StatusOK, aluno)

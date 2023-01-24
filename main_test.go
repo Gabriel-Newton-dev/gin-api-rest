@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -45,7 +44,7 @@ func TestCheckEndpointSalutation(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 	assert.Equal(t, http.StatusOK, response.Code, "Deveriam ser iguais")
-	mockDaResposta := `{"API diz":"Seja bem-vindo gabriel a nossa API"}`
+	mockDaResposta := `{"API diz":"Welcome gabriel to our API"}`
 	responseBody, _ := ioutil.ReadAll(response.Body)
 	assert.Equal(t, mockDaResposta, string(responseBody))
 
@@ -79,15 +78,16 @@ func TestSearchByCPF(t *testing.T) {
 func TestSearchStudentByID(t *testing.T) {
 	controllers.CallViper()
 	database.ConectaComBancoDeDados()
+	CreateStudentMock()
+	defer DeleteStudentMock()
 	r := RouterSetup()
 	r.GET("/alunos/:id", controllers.SearchStudentbyID)
 	SearchPath := "/alunos/" + strconv.Itoa(ID)
 	req, _ := http.NewRequest("GET", SearchPath, nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
-	var Student models.Student
-	json.Unmarshal(response.Body.Bytes(), &Student)
-	fmt.Println(Student.Nome)
-	//assert.Equal(t, ) // Firts test t,
+	var StudentMock models.Student
+	json.Unmarshal(response.Body.Bytes(), &StudentMock)
+	assert.Equal(t, "Aluno Teste", StudentMock.Nome) // Firts test t, após valor esperado e valor que iremos receber no alunoMock.Name
 
 }
