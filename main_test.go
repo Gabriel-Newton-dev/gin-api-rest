@@ -25,14 +25,14 @@ func RouterSetup() *gin.Engine {
 }
 
 func CreateStudentMock() {
-	aluno := models.Student{Nome: "Aluno Teste", CPF: "12345678910", RG: "123456789"}
+	aluno := models.Aluno{Nome: "Aluno Teste", CPF: "12345678910", RG: "123456789"}
 	database.DB.Create(&aluno)
 	ID = int(aluno.ID)
 
 }
 
 func DeleteStudentMock() {
-	var aluno models.Student
+	var aluno models.Aluno
 	database.DB.Delete(&aluno, ID)
 
 }
@@ -43,8 +43,8 @@ func TestCheckEndpointSalutation(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/gabriel", nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
-	assert.Equal(t, http.StatusOK, response.Code, "Deveriam ser iguais")
-	mockDaResposta := `{"API diz":"Welcome gabriel to our API"}`
+	assert.Equal(t, http.StatusOK, response.Code, "they should be the same")
+	mockDaResposta := `{"API says":"Welcome gabriel to our API."}`
 	responseBody, _ := ioutil.ReadAll(response.Body)
 	assert.Equal(t, mockDaResposta, string(responseBody))
 
@@ -86,8 +86,7 @@ func TestSearchStudentByID(t *testing.T) {
 	req, _ := http.NewRequest("GET", SearchPath, nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
-	var StudentMock models.Student
+	var StudentMock models.Aluno
 	json.Unmarshal(response.Body.Bytes(), &StudentMock)
 	assert.Equal(t, "Aluno Teste", StudentMock.Nome) // Firts test t, após valor esperado e valor que iremos receber no alunoMock.Name
-
 }
