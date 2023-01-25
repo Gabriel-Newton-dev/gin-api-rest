@@ -44,7 +44,7 @@ func TestCheckEndpointSalutation(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 	assert.Equal(t, http.StatusOK, response.Code, "Deveriam ser iguais")
-	mockDaResposta := `{"API diz":"Seja bem-vindo gabriel a nossa API"}`
+	mockDaResposta := `{"API diz":"Welcome gabriel to our API"}`
 	responseBody, _ := ioutil.ReadAll(response.Body)
 	assert.Equal(t, mockDaResposta, string(responseBody))
 

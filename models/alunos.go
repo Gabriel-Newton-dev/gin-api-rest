@@ -13,9 +13,9 @@ type Student struct {
 }
 
 // criei um slice de Aluno(como se fosse uma lista, pq terá vários)
-var Alunos []Student
+var Students []Student
 
-func ValidaDadosDeAluno(aluno *Student) error {
+func ValidateStudentData(aluno *Student) error {
 	if err := validator.Validate(aluno); err != nil {
 		return err
 	}
