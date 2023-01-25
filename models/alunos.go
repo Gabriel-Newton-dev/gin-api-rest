@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Student struct {
+type Aluno struct {
 	gorm.Model
 	Nome string `json:"nome" validate:"nonzero"`
 	CPF  string `json:"cpf" validate:"len=11, regexp=^[0-9]*$"`
@@ -13,9 +13,9 @@ type Student struct {
 }
 
 // criei um slice de Aluno(como se fosse uma lista, pq terá vários)
-var Students []Student
+var Students []Aluno
 
-func ValidateStudentData(aluno *Student) error {
+func ValidateStudentData(aluno *Aluno) error {
 	if err := validator.Validate(aluno); err != nil {
 		return err
 	}

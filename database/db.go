@@ -15,7 +15,7 @@ var (
 	err error
 )
 
-func ConectaComBancoDeDados() {
+func ConnectDataBase() {
 	dbName := viper.Get("DB_NAME")
 	dbPassword := viper.Get("DB_PASSWORD")
 	dbUser := viper.Get("DB_USER")
@@ -25,7 +25,7 @@ func ConectaComBancoDeDados() {
 		log.Panic("Erro ao conectar com banco de dados")
 	}
 
-	DB.AutoMigrate(&models.Student{})
+	DB.AutoMigrate(&models.Aluno{})
 }
 
 // para eu criar uma tabela no banco de dados usando o GORM, eu utilizo o DB.AutoMigrate

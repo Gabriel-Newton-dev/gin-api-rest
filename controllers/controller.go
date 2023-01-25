@@ -10,7 +10,7 @@ import (
 )
 
 func DisplayAllStudent(c *gin.Context) {
-	var alunos []models.Student
+	var alunos []models.Aluno
 	database.DB.Find(&alunos)
 	// database.DB.Find(mais endereco de memoria), por se tratar de um slice com várias informacoes
 	//temos que criar uma variável var alunos que recebe um slice da struct []models.Aluno
@@ -24,7 +24,7 @@ func Salutation(c *gin.Context) {
 }
 
 func CreateNewStudent(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
@@ -40,7 +40,7 @@ func CreateNewStudent(c *gin.Context) {
 }
 
 func SearchStudentbyID(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	id := c.Params.ByName("id")
 	database.DB.First(&aluno, id)
 	if aluno.ID == 0 {
@@ -52,7 +52,7 @@ func SearchStudentbyID(c *gin.Context) {
 }
 
 func DeleteStudent(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	id := c.Params.ByName("id")
 	database.DB.Delete(&aluno, id)
 	c.JSON(http.StatusOK, gin.H{
@@ -60,7 +60,7 @@ func DeleteStudent(c *gin.Context) {
 }
 
 func EditStudent(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	id := c.Params.ByName("id")
 	database.DB.First(&aluno, id)
 	if err := c.ShouldBindJSON(&aluno); err != nil {
@@ -84,9 +84,9 @@ func EditStudent(c *gin.Context) {
 // if err := .ShouldBindJSON()
 
 func SearchByCpf(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	cpf := c.Param("cpf")
-	database.DB.Where(&models.Student{CPF: cpf}).First(&aluno)
+	database.DB.Where(&models.Aluno{CPF: cpf}).First(&aluno)
 	if aluno.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Not Found": "Not Found CPF"})
@@ -96,9 +96,9 @@ func SearchByCpf(c *gin.Context) {
 }
 
 func SearchByRg(c *gin.Context) {
-	var aluno models.Student
+	var aluno models.Aluno
 	rg := c.Param("rg")
-	database.DB.Where(&models.Student{RG: rg}).First(&aluno)
+	database.DB.Where(&models.Aluno{RG: rg}).First(&aluno)
 	if aluno.ID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"Not Found": "Not Found RG"})
