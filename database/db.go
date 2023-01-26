@@ -15,7 +15,7 @@ var (
 	err error
 )
 
-func ConectaComBancoDeDados() {
+func ConnectDataBase() {
 	dbName := viper.Get("DB_NAME")
 	dbPassword := viper.Get("DB_PASSWORD")
 	dbUser := viper.Get("DB_USER")

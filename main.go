@@ -8,6 +8,6 @@ import (
 
 func main() {
 	controllers.CallViper()
-	database.ConectaComBancoDeDados()
+	database.ConnectDataBase()
 	routes.HandleRequests()
 }

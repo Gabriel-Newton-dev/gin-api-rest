@@ -25,7 +25,7 @@ func RouterSetup() *gin.Engine {
 }
 
 func CreateStudentMock() {
-	aluno := models.Aluno{Nome: "Aluno Teste", CPF: "12345678910", RG: "123456789"}
+	aluno := models.Aluno{Nome: "Student Test", CPF: "12345678910", RG: "123456789"}
 	database.DB.Create(&aluno)
 	ID = int(aluno.ID)
 
@@ -53,7 +53,7 @@ func TestCheckEndpointSalutation(t *testing.T) {
 func TestListingAllStudentHandler(t *testing.T) {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
-	database.ConectaComBancoDeDados()
+	database.ConnectDataBase()
 	r := RouterSetup()
 	r.GET("/alunos", controllers.DisplayAllStudent)
 	req, _ := http.NewRequest("GET", "/alunos", nil)
@@ -66,7 +66,7 @@ func TestListingAllStudentHandler(t *testing.T) {
 
 func TestSearchByCPF(t *testing.T) {
 	controllers.CallViper()
-	database.ConectaComBancoDeDados()
+	database.ConnectDataBase()
 	r := RouterSetup()
 	r.GET("/alunos/cpf/:cpf", controllers.SearchByCpf)
 	req, _ := http.NewRequest("GET", "/alunos/cpf/20092060720", nil)
@@ -77,7 +77,7 @@ func TestSearchByCPF(t *testing.T) {
 
 func TestSearchStudentByID(t *testing.T) {
 	controllers.CallViper()
-	database.ConectaComBancoDeDados()
+	database.ConnectDataBase()
 	CreateStudentMock()
 	defer DeleteStudentMock()
 	r := RouterSetup()
@@ -88,5 +88,18 @@ func TestSearchStudentByID(t *testing.T) {
 	r.ServeHTTP(response, req)
 	var StudentMock models.Aluno
 	json.Unmarshal(response.Body.Bytes(), &StudentMock)
-	assert.Equal(t, "Aluno Teste", StudentMock.Nome) // Firts test t, após valor esperado e valor que iremos receber no alunoMock.Name
+	assert.Equal(t, "Student Test", StudentMock.Nome) //Firts test t, after expected value is value that we will receive in alunoMock.Name
+}
+func TestDeleteStudent(t *testing.T) {
+	controllers.CallViper()
+	database.ConnectDataBase()
+	CreateStudentMock()
+	r := RouterSetup()
+	r.DELETE("/alunos/:id", controllers.DeleteStudent)
+	searchPath := "/alunos/" + strconv.Itoa(ID)
+	// searchPath := "/alunos/36" - podemos passar direto aqui o id para ele realizar a exclusão.
+	req, _ := http.NewRequest("DELETE", searchPath, nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+	assert.Equal(t, http.StatusOK, response.Code)
 }
