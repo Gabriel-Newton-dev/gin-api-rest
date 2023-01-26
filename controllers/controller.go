@@ -111,3 +111,12 @@ func CallViper() {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 }
+
+// funcao para rendereizar na tela index.html
+func DisplayIndexPage(c *gin.Context) {
+	var students []models.Aluno
+	database.DB.Find(&students)
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"students": students,
+	})
+}
