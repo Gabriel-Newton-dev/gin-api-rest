@@ -9,7 +9,16 @@ import (
 	"github.com/spf13/viper"
 )
 
-func DisplayAllStudent(c *gin.Context) {
+//DisplaysAllStudent godoc
+//@Sumary  Display all student
+//@Description Route to displays all student
+//@Tags   students
+//@Accept json
+//@Produce json
+//@Sucess  200{object} []models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   /alunos [get]
+func DisplaysAllStudent(c *gin.Context) {
 	var alunos []models.Aluno
 	database.DB.Find(&alunos)
 	// database.DB.Find(mais endereco de memoria), por se tratar de um slice com várias informacoes
@@ -17,12 +26,32 @@ func DisplayAllStudent(c *gin.Context) {
 	c.JSON(200, alunos)
 }
 
+//Salutation godoc
+//@Sumary  Salutation
+//@Description Route to create students
+//@Tags   students
+//@Accept  json
+//@Produce json
+//@Param   Params.ByName("nome")
+//@Sucess  200{object} "API says": "Welcome " + name + " to our API."
+//@Failure 404{object} http.BadRequest
+//@Route   /:nome [GET]
 func Salutation(c *gin.Context) {
 	name := c.Params.ByName("nome")
 	c.JSON(200, gin.H{
 		"API says": "Welcome " + name + " to our API."})
 }
 
+//CreateNewStudent godoc
+//@Sumary  Create Students
+//@Description Route to create students
+//@Tags   students
+//@Accept  json
+//@Produce json
+//@Param   students body models.Alunos true "models Students"
+//@Sucess  200{object} models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   /alunos [POST]
 func CreateNewStudent(c *gin.Context) {
 	var aluno models.Aluno
 	if err := c.ShouldBindJSON(&aluno); err != nil {
@@ -39,6 +68,16 @@ func CreateNewStudent(c *gin.Context) {
 	c.JSON(http.StatusCreated, aluno)
 }
 
+//SearchStudentbyID godoc
+//@Sumary  Search Student by ID
+//@Description Route to search students by ID
+//@Tags   students
+//@Accept  json
+//@Produce json
+//@Param   students body models.Alunos true "models Students"
+//@Sucess  200{object} models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   /alunos/:id [GET]
 func SearchStudentbyID(c *gin.Context) {
 	var aluno models.Aluno
 	id := c.Params.ByName("id")
@@ -51,6 +90,16 @@ func SearchStudentbyID(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
+//DeleteStudent godoc
+//@Sumary  Delete Student
+//@Description Route to delete student
+//@Tags   student
+//@Accept  json
+//@Produce json
+//@Param   students body models.Alunos true "models Students"
+//@Sucess  200{object} models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   /alunos/:id [DELETE]
 func DeleteStudent(c *gin.Context) {
 	var aluno models.Aluno
 	id := c.Params.ByName("id")
@@ -59,6 +108,16 @@ func DeleteStudent(c *gin.Context) {
 		"Deleted": "User successfully deleted from data base"})
 }
 
+//EditStudent godoc
+//@Sumary  Edit Student
+//@Description Route to edit student
+//@Tags   student
+//@Accept  json
+//@Produce json
+//@Param   students body models.Alunos true "models Students"
+//@Sucess  200{object} models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   /alunos/:id [PATCH]
 func EditStudent(c *gin.Context) {
 	var aluno models.Aluno
 	id := c.Params.ByName("id")
@@ -78,7 +137,7 @@ func EditStudent(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
-// a funcao edita alunos ela irá pegar o copor da nossa requisicao e mudar no BD
+// a funcao edita alunos ela irá pegar o corpo da nossa requisicao e mudar no BD
 // Se tem o corpo a forma que usamos é o shouldBindJson para empacotar todo corpo da
 //requisicao com base na nossa struct, com base no nosso endereco de memória da var aluno que criamos
 // if err := .ShouldBindJSON()
@@ -107,13 +166,25 @@ func SearchByRg(c *gin.Context) {
 	c.JSON(http.StatusOK, aluno)
 }
 
+//CallViper godoc
+//@Sumary  Call Viper
+//@Description Route to Call Viper
 func CallViper() {
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 }
 
-// funcao para rendereizar na tela index.html
-func DisplayIndexPage(c *gin.Context) {
+//DisplaysIndexPage godoc
+//@Sumary  Displays index.html
+//@Description Route to render on index screen
+//@Tags   student
+//@Accept  json
+//@Produce json
+//@Param   students body []models.Alunos true "models Students"
+//@Sucess  200{object} []models.Alunos
+//@Failure 404{object} http.BadRequest
+//@Route   "/index" [GET]
+func DisplaysIndexPage(c *gin.Context) {
 	var students []models.Aluno
 	database.DB.Find(&students)
 	c.HTML(http.StatusOK, "index.html", gin.H{
@@ -121,8 +192,11 @@ func DisplayIndexPage(c *gin.Context) {
 	})
 }
 
-// I created a func for when I have a route found
-
+// funcao para rendereizar na tela index.html
+//DisplaysIndexPage godoc
+//@Sumary  I created a func for when I have a route found
+//@Description Route to not Found
+//@Route   "r.NoRoute"
 func RouteNotFound(c *gin.Context) {
 	c.HTML(http.StatusNotFound, "404.html", nil)
 }

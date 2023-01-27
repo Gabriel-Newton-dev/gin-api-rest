@@ -56,7 +56,7 @@ func TestListingAllStudentHandler(t *testing.T) {
 	viper.ReadInConfig()
 	database.ConnectDataBase()
 	r := RouterSetup()
-	r.GET("/alunos", controllers.DisplayAllStudent)
+	r.GET("/alunos", controllers.DisplaysAllStudent)
 	req, _ := http.NewRequest("GET", "/alunos", nil)
 	response := httptest.NewRecorder() // para armanezar todas as informacoes do corpo da nossa resposta
 	r.ServeHTTP(response, req)
