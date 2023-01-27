@@ -1,4 +1,4 @@
-<h1>API REST EM GOLANG COM GIN</h1> ![Golang](./image/golang%20e%20docker.png)
+<h1>API REST EM GOLANG COM GIN</h1> ![Golang](./image/golang_docker.png)
 
 Codei essa Api usando apenas Golang e usando o Framework Gin. 
 
