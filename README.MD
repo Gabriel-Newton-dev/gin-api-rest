@@ -54,8 +54,11 @@ Renderização para visualização das informações da API na página HTML, usa
 ## Dependências a serem instaladas no terminal na pasta do projeto:
 
 :heavy_check_mark: go get -u github.com/gin-gonic/gin)
+
 :heavy_check_mark: go get -u gorm.io/gorm
+
 :heavy_check_mark: go get gorm.io/driver/postgres 
+
 :heavy_check_mark:go get github.com/spf13/viper
 
 
@@ -94,7 +97,7 @@ Para utilizar a mesma além de fazer as instalações necessárias conforme dito
 
 |ID |created_at |update_at |delete_at |nome |cpf |rg |
 | -------- |-------- |-------- |-------- |-------- ||-------- ||-------- |
-|2 |"2023-01-05 22:20:34.801617-08"| "2023-01-05 22:20:34.801617-08"| "Gabriel Newton"| "123.456.789-00"| "12.345.678-9"
+|2 |"2023-01-05 22:20:34.801617-08"| "2023-01-05 22:20:34.801617-08"| "Gabriel Newton"| "123.456.789-00"| "12.345.678-9"|
 
 
 ## Iniciando/Configurando banco de dados
