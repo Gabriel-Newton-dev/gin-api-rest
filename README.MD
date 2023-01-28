@@ -97,7 +97,7 @@ Para utilizar a mesma além de fazer as instalações necessárias conforme dito
 
 |ID |created_at |update_at |delete_at |nome |cpf |rg |
 | -------- |-------- |-------- |-------- |-------- |-------- |-------- |
-|2 |2023-01-05 22:20:34.801617-08|2023-01-05 22:20:34.801617-08|Gabriel Newton|123.456.789-00|12.345.678-9|
+|2 |2023-01-05 22:20:34|2023-01-05 22:20:34||Gabriel Newton|123.456.789-00|12.345.678-9|
 
 ## Iniciando/Configurando banco de dados
 
@@ -122,8 +122,7 @@ Em [issues](https://github.com/Gabriel-Newton-dev/gin-api-rest/issues) foram abe
 
 ## Desenvolvedor:
 
-| <img src="/image/fotopf2.jpeg"width=115><br>|
-| :---: |
+<img src="/image/fotopf2.jpeg" width=125px>
 
 ## Licença 
 
