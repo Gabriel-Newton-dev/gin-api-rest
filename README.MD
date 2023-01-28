@@ -1,4 +1,4 @@
-<h1>API REST EM GOLANG COM GIN<</h1> 
+<h1>API REST EM GOLANG COM GIN</h1> 
 
 <img src="/image/golang e docker.png" width=250px>
 
@@ -8,7 +8,6 @@
   <img align="center" height="30" width="40" img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
   <img align="center" height="30" width="40" img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
   <img align="center" height="30" width="40" img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" />
-  <img align="center" height="30" width="40" img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" />
 </div>
 
 > <p><h2>Status do Projeto: concluido</h2></p>
@@ -18,8 +17,6 @@
 :small_blue_diamond: [Descrição do projeto](#descrição-do-projeto)
 
 :small_blue_diamond: [Funcionalidades](#funcionalidades)
-
-:small_blue_diamond: [Deploy da Aplicação](#deploy-da-aplicação-dash)
 
 :small_blue_diamond: [Pré-requisitos](#pré-requisitos)
 
@@ -85,6 +82,7 @@ $ go test
 
 ````
 $ go test -run + nome do teste
+$ go test -run TestSearchByCPF (exemplo)
 ````
 
 ## Casos de Uso
