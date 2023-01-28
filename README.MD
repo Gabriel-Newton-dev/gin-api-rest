@@ -1,6 +1,6 @@
 <h1>API REST EM GOLANG COM GIN</h1>
 
-<img src="/image/golang e docker.png" width=150px>
+<img src="/image/golang e docker.png" width=250px>
 
 Codei essa Api usando apenas Golang e usando o Framework Gin. 
 
