@@ -11,7 +11,7 @@
   <img align="center" height="30" width="40" img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" />
 </div>
 
-> Status do Projeto: concluido
+> <p><h2>Status do Projeto: concluido</h2></p>
 
 ### Tópicos 
 
@@ -25,9 +25,6 @@
 
 :small_blue_diamond: [Como rodar a aplicação](#como-rodar-a-aplicação-arrow_forward)
 
-... 
-
-Insira os tópicos do README em links para facilitar a navegação do leitor
 
 ## Descrição do projeto 
 
@@ -67,7 +64,7 @@ Renderização para visualização das informações da API na página HTML, usa
 No terminal, clone o projeto: 
 
 ```
-git clone https://github.com/Gabriel-Newton-dev/gin-api-rest.git
+$ git clone https://github.com/Gabriel-Newton-dev/gin-api-rest.git
 ```
 Ainda no terminal execute:
 
@@ -96,7 +93,7 @@ Para utilizar a mesma além de fazer as instalações necessárias conforme dito
 ### Usuários: 
 
 |ID |created_at |update_at |delete_at |nome |cpf |rg |
-| -------- |-------- |-------- |-------- |-------- |
+| -------- |-------- |-------- |-------- |-------- ||-------- ||-------- |
 |2 |"2023-01-05 22:20:34.801617-08"| "2023-01-05 22:20:34.801617-08"| "Gabriel Newton"| "123.456.789-00"| "12.345.678-9"
 
 
@@ -119,14 +116,12 @@ $ docker-compose up
 
 ## Resolvendo Problemas :exclamation:
 
-Em [issues]() foram abertos alguns problemas gerados durante o desenvolvimento desse projeto e como foram resolvidos. 
+Em [issues](https://github.com/Gabriel-Newton-dev/gin-api-rest/issues) foram abertos alguns problemas gerados durante o desenvolvimento desse projeto e como foram resolvidos. 
 
-## Desenvolvedores/Contribuintes :octocat:
+## Desenvolvedor:
 
-Liste o time responsável pelo desenvolvimento do projeto
-
-| [[<img src="/image/fotopf2.jpeg"width=115><br><sub>Diana Regina</sub>]](https://github.com/Gabriel-Newton-dev) |
-| :---: | :---: | :---: 
+| [<img src="/image/fotopf2.jpeg"width=115><br><sub>Diana Regina</sub>Gabriel Newton](https://github.com/Gabriel-Newton-dev) |
+| :---: |
 
 ## Licença 
 
