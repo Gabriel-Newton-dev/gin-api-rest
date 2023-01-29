@@ -56,7 +56,9 @@ Renderização para visualização das informações da API na página HTML, usa
 
 :heavy_check_mark: go get gorm.io/driver/postgres 
 
-:heavy_check_mark:go get github.com/spf13/viper
+:heavy_check_mark: go get github.com/spf13/viper
+
+:heavy_check_mark: go get gopkg.in/validator.v2
 
 
 ## Como rodar a aplicação :arrow_forward:
