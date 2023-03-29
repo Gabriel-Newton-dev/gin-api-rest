@@ -26,7 +26,11 @@ func ConnectDataBase() {
 	}
 
 	DB.AutoMigrate(&models.Aluno{})
+	DB.AutoMigrate(&models.User{})
 }
 
 // para eu criar uma tabela no banco de dados usando o GORM, eu utilizo o DB.AutoMigrate
 // passando o endereço de memória da Struct que eu quero criar com uma instancia dela{}
+func GetDatabase() *gorm.DB {
+	return DB
+}
