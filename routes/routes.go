@@ -18,6 +18,9 @@ func HandleRequests() {
 	r.GET("/alunos/cpf/:cpf", controllers.SearchByCpf)
 	r.GET("/alunos/rg/:rg", controllers.SearchByRg)
 	r.GET("/index", controllers.DisplaysIndexPage)
+	r.POST("/user", controllers.CreateNewUser)
+	r.GET("/user/:id", controllers.DisplaysAllUserByID)
+	r.GET("/user", controllers.DisplaysAllUser)
 	r.NoRoute(controllers.RouteNotFound)
 	r.Run()
 }
