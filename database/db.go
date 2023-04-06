@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/Gabriel-Newton-dev/gin-api-rest/migrations"
 	"github.com/Gabriel-Newton-dev/gin-api-rest/models"
 	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
@@ -15,6 +16,7 @@ var (
 	err error
 )
 
+// Abre conexão com banco de dados.
 func ConnectDataBase() {
 	dbName := viper.Get("DB_NAME")
 	dbPassword := viper.Get("DB_PASSWORD")
@@ -27,6 +29,7 @@ func ConnectDataBase() {
 
 	DB.AutoMigrate(&models.Aluno{})
 	DB.AutoMigrate(&models.User{})
+	migrations.RunMigrations(DB)
 }
 
 // para eu criar uma tabela no banco de dados usando o GORM, eu utilizo o DB.AutoMigrate
