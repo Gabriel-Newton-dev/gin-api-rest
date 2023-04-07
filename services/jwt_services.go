@@ -25,32 +25,36 @@ type Claim struct {
 }
 
 // funcao de gerar token // retorna uma string que será o nosso token ou um error
-func (s *jwtService) GenerateToken(id uint) (string, error) {
+func (svc *jwtService) GenerateToken(id uint) (string, error) {
 	claim := &Claim{
 		id,
 		jwt.StandardClaims{
+			Audience:  "",
 			ExpiresAt: time.Now().Add(time.Hour * 2).Unix(),
-			Issuer:    s.issure,
+			Id:        "",
 			IssuedAt:  time.Now().Unix(),
+			Issuer:    svc.issure,
+			NotBefore: 0,
+			Subject:   "",
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
 
-	t, err := token.SignedString([]byte(s.secretkey))
+	tokens, err := token.SignedString([]byte(svc.secretkey))
 	if err != nil {
 		return "", err
 	}
-	return t, nil
+	return tokens, nil
 }
 
 // validar o token
 
-func (s *jwtService) Validatetoken(token string) bool {
+func (svc *jwtService) Validatetoken(token string) bool {
 	_, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
 		if _, isValid := t.Method.(*jwt.SigningMethodHMAC); !isValid {
 			return nil, fmt.Errorf("Invalid token: %v", token)
 		}
-		return []byte(s.secretkey), nil
+		return []byte(svc.secretkey), nil
 	})
 	return err == nil
 }
