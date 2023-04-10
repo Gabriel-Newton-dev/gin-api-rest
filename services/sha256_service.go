@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// funcao para encriptar
 func SHA256Encoder(s string) string {
 	str := sha256.Sum256([]byte(s))
 

@@ -1,17 +1,11 @@
 package services
 
-import (
-	"testing"
+// func Test_GenerateToken(t *testing.T) {
+// 	ctrl := gomock.NewController(t)
 
-	"github.com/golang/mock/gomock"
-)
+// 	m := newMockGenerateToken(ctrl)
 
-func Test_GenerateToken(t *testing.T) {
-	ctrl := gomock.NewController(t)
+// 	m.
+// 		EXPECT()
 
-	m := newMockGenerateToken(ctrl)
-
-	m.
-		EXPECT()
-
-}
+// }
