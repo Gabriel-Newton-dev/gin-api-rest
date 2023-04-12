@@ -21,7 +21,7 @@ func HandleRequests() {
 	r.POST("/user", controllers.CreateNewUser)          // CREATE USER
 	r.GET("/user/:id", controllers.DisplaysAllUserByID) // SEARCH USER ID
 	r.GET("/user", controllers.DisplaysAllUser)         // DISPLAYS ALL USER
-	r.NoRoute(controllers.RouteNotFound)
+	r.NoRoute(controllers.RouteNotFound)                //Route NotFound
 	r.Run()
 }
 
